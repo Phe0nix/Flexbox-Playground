@@ -2,7 +2,7 @@
 
 A new way to learn CSS flexbox with live playground. Here for each Flexbox property, you can read about it and at the same time, you can able to live to view how this property works.
 
-Watch - [Flexbox Playground](https://github.com/facebook/create-react-app)
+Watch - [Flexbox Playground](https://tranquil-semolina-40605c.netlify.app/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
