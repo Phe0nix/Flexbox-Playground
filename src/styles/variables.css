@@ -1,0 +1,11 @@
+:root {
+  --cb-background: #151f28;
+  --white: #ffffff;
+  --black: #000000;
+  --box-background: #d3d3d3;
+  --blue: #2c0b8e;
+  --gray: #5c6670;
+  --aqua: #00ffff;
+  --row-gap: 10;
+  --column-gap: 10;
+}
