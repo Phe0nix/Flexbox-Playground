@@ -4,10 +4,10 @@ import CodeBlock from '../CodeBlock/CodeBlock';
 import useUrlState from '../../hooks/useUrlState';
 
 export default function FlexWrap() {
-  const [ext, setExt] = useUrlState('fw_wrap', 'nowrap');
+  const [ext, setExt] = useUrlState('fw_wrap', 'nowrap', { hash: 'flex-wrap' });
   const min = 150;
   const max = 900;
-  const [width, setWidth] = useUrlState('fw_w', max, { parse: Number });
+  const [width, setWidth] = useUrlState('fw_w', max, { parse: Number, hash: 'flex-wrap' });
   let handleChange = (e) => {
     setExt(e.target.value);
   }

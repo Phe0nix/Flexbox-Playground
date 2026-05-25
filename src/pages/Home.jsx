@@ -10,7 +10,7 @@ import FlexWrap from "../comp/FlexWrap/FlexWrap"
 import Gap from "../comp/Gap/Gap"
 import JustifyContent from "../comp/JustifyContent/JustifyContent"
 import Order from "../comp/Order/Order"
-import { useMemo } from "react"
+import { useEffect, useMemo } from "react"
 import useUrlState from "../hooks/useUrlState"
 
 const LESSONS = [
@@ -40,6 +40,31 @@ export default function Home() {
       return matchesGroup && matchesQuery
     })
   }, [group, query])
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.location.hash) {
+      return
+    }
+
+    const targetId = window.location.hash.slice(1)
+    const target = document.getElementById(targetId)
+
+    if (!target) {
+      return
+    }
+
+    const details = target.querySelector('details')
+
+    if (details) {
+      details.open = true
+    }
+
+    window.requestAnimationFrame(() => {
+      if (typeof target.scrollIntoView === 'function') {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    })
+  }, [filteredLessons])
 
   const containerCount = LESSONS.filter((lesson) => lesson.type === 'container').length
   const itemCount = LESSONS.length - containerCount

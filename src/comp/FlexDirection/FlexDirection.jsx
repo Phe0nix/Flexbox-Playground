@@ -4,7 +4,7 @@ import CodeBlock from '../CodeBlock/CodeBlock';
 import useUrlState from '../../hooks/useUrlState';
 
 export default function FlexDirection() {
-  const [ext, setExt] = useUrlState('fd_dir', 'row');
+  const [ext, setExt] = useUrlState('fd_dir', 'row', { hash: 'flex-direction' });
   let handleChange = (e) => {
     setExt(e.target.value);
   }

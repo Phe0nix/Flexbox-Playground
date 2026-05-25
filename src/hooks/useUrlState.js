@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function useUrlState(key, defaultValue, options = {}) {
   const parse = options.parse || ((value) => value);
   const serialize = options.serialize || ((value) => String(value));
+  const hash = options.hash;
+  const shouldSyncHash = useRef(false);
 
   const [value, setValue] = useState(() => {
     if (typeof window === 'undefined') {
@@ -37,9 +39,18 @@ export default function useUrlState(key, defaultValue, options = {}) {
       url.searchParams.set(key, serialize(value));
     }
 
+    if (hash && shouldSyncHash.current) {
+      url.hash = hash;
+    }
+
     const nextUrl = `${url.pathname}${url.search}${url.hash}`;
     window.history.replaceState({}, '', nextUrl);
-  }, [defaultValue, key, serialize, value]);
+  }, [defaultValue, hash, key, serialize, value]);
 
-  return [value, setValue];
+  const setUrlState = (nextValue) => {
+    shouldSyncHash.current = true;
+    setValue(nextValue);
+  };
+
+  return [value, setUrlState];
 }
