@@ -4,11 +4,11 @@ import CodeBlock from '../CodeBlock/CodeBlock';
 import useUrlState from '../../hooks/useUrlState';
 
 export default function FlexFlow() {
-  const [ext, setExt] = useUrlState('ff_wrap', 'nowrap');
-  const [fdVal, setFdVal] = useUrlState('ff_dir', 'row');
+  const [ext, setExt] = useUrlState('ff_wrap', 'nowrap', { hash: 'flex-flow' });
+  const [fdVal, setFdVal] = useUrlState('ff_dir', 'row', { hash: 'flex-flow' });
   const min = 150;
   const max = 900;
-  const [width, setWidth] = useUrlState('ff_w', max, { parse: Number });
+  const [width, setWidth] = useUrlState('ff_w', max, { parse: Number, hash: 'flex-flow' });
   let fwHandleChange = (e) => {
     setExt(e.target.value);
   }

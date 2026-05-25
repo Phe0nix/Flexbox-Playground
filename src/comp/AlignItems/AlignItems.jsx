@@ -12,7 +12,7 @@ const ALIGN_ITEMS_MAP = {
 };
 
 export default function AlignItems() {
-  const [ext, setExt] = useUrlState('ai_a', 'stretch');
+  const [ext, setExt] = useUrlState('ai_a', 'stretch', { hash: 'align-items' });
   let handleChange = (e) => {
     setExt(e.target.value);
   }

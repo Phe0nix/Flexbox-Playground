@@ -4,7 +4,7 @@ import CodeBlock from '../CodeBlock/CodeBlock';
 import useUrlState from '../../hooks/useUrlState';
 
 export default function FlexContainer() {
-  const [ext, setExt] = useUrlState('fc_d', 'block');
+  const [ext, setExt] = useUrlState('fc_d', 'block', { hash: 'flex-container' });
   let handleChange = (e) => {
     setExt(e.target.value);
   }

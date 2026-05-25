@@ -4,10 +4,10 @@ import CodeBlock from '../CodeBlock/CodeBlock';
 import useUrlState from '../../hooks/useUrlState';
 
 export default function FlexShrink() {
-  const [fshrink, setfshrink] = useUrlState('fs_v', 'fs1');
+  const [fshrink, setfshrink] = useUrlState('fs_v', 'fs1', { hash: 'flex-shrink' });
   const min = 150;
   const max = 900;
-  const [width, setWidth] = useUrlState('fs_w', max, { parse: Number });
+  const [width, setWidth] = useUrlState('fs_w', max, { parse: Number, hash: 'flex-shrink' });
   let handleFlexShrink = (e) => {
     setfshrink(e.target.value);
   }

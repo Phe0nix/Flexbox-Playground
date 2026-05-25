@@ -6,7 +6,7 @@ import useUrlState from '../../hooks/useUrlState';
 export default function FlexBasis() {
   const min = 66;
   const max = 400;
-  const [width, setWidth] = useUrlState('fb_w', min, { parse: Number });
+  const [width, setWidth] = useUrlState('fb_w', min, { parse: Number, hash: 'flex-basis' });
   let handleWidth = (e) => {
     setWidth(e.target.value);
   }

@@ -5,14 +5,14 @@ import { useEffect } from 'react';
 import useUrlState from '../../hooks/useUrlState';
 
 export default function Gap() {
-  const [fwrap, setFwrap] = useUrlState('gap_wrap', 'wrap');
+  const [fwrap, setFwrap] = useUrlState('gap_wrap', 'wrap', { hash: 'gap' });
   const min = 150;
   const max = 900;
   const gmin = 10;
   const gmax = 50;
-  const [width, setWidth] = useUrlState('gap_w', max, { parse: Number });
-  const [rowGap, setRowGap] = useUrlState('gap_rg', gmin, { parse: Number });
-  const [colGap, setColGap] = useUrlState('gap_cg', gmin, { parse: Number });
+  const [width, setWidth] = useUrlState('gap_w', max, { parse: Number, hash: 'gap' });
+  const [rowGap, setRowGap] = useUrlState('gap_rg', gmin, { parse: Number, hash: 'gap' });
+  const [colGap, setColGap] = useUrlState('gap_cg', gmin, { parse: Number, hash: 'gap' });
   let handleRG = (e) => {
     setRowGap(e.target.value);
   }

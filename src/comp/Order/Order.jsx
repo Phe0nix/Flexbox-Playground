@@ -4,7 +4,7 @@ import CodeBlock from '../CodeBlock/CodeBlock';
 import useUrlState from '../../hooks/useUrlState';
 
 export default function Order() {
-  const [ext, setExt] = useUrlState('ord_v', 'order0');
+  const [ext, setExt] = useUrlState('ord_v', 'order0', { hash: 'order' });
   let handleChange = (e) => {
     setExt(e.target.value);
   }

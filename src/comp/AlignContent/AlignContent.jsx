@@ -4,11 +4,11 @@ import CodeBlock from '../CodeBlock/CodeBlock';
 import useUrlState from '../../hooks/useUrlState';
 
 export default function AlignContent() {
-  const [ext, setExt] = useUrlState('ac_val', 'normal');
-  const [fwrap, setFwrap] = useUrlState('ac_wrap', 'wrap');
+  const [ext, setExt] = useUrlState('ac_val', 'normal', { hash: 'align-content' });
+  const [fwrap, setFwrap] = useUrlState('ac_wrap', 'wrap', { hash: 'align-content' });
   const min = 150;
   const max = 900;
-  const [width, setWidth] = useUrlState('ac_w', max, { parse: Number });
+  const [width, setWidth] = useUrlState('ac_w', max, { parse: Number, hash: 'align-content' });
   let handleChange = (e) => {
     setExt(e.target.value);
   }
