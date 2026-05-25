@@ -22,6 +22,7 @@
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
+    "build:docs": "vite build --outDir docs --emptyOutDir",
     "preview": "vite preview",
     "test": "vitest"
   },

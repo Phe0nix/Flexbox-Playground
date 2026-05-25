@@ -9,6 +9,18 @@
     <link rel="apple-touch-icon" href="/logo192.png" />
     <link rel="manifest" href="/manifest.json" />
     <title>FlexBox Playground</title>
+    <script>
+      (function () {
+        var isGitHubPages = window.location.hostname.endsWith("github.io");
+        var inDocs = window.location.pathname.indexOf("/docs/") !== -1;
+
+        if (isGitHubPages && !inDocs) {
+          var basePath = window.location.pathname.replace(/\/?$/, "");
+          var target = basePath + "/docs/" + window.location.search + window.location.hash;
+          window.location.replace(target);
+        }
+      })();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
