@@ -1,13 +1,16 @@
 import jc from './jc.module.scss';
 import cb from '../CodeBlock/cb.module.scss';
 import CodeBlock from '../CodeBlock/CodeBlock';
-import { useState } from 'react';
+import useUrlState from '../../hooks/useUrlState';
 
 export default function JustifyContent() {
-  let [ext, setExt] = useState('flex-start');
+  const [ext, setExt] = useUrlState('jc_j', 'flex-start');
   let handleChange = (e) => {
     setExt(e.target.value);
   }
+
+  const cssOutput = `display: flex;\njustify-content: ${ext};`;
+
   return (
     <details className={jc.wrapper}>
       <summary><h3>Justify Content</h3></summary>
@@ -24,7 +27,7 @@ export default function JustifyContent() {
         <li><strong>space-around:</strong> items are evenly distributed with equal space around them.</li>
         <li><strong>space-evenly:</strong> items are distributed so that the spacing between any two items (and the space to the edges) is equal.</li>
       </ul>
-      <CodeBlock>
+      <CodeBlock cssOutput={cssOutput}>
         <div className={`${cb.container} ${cb.flex} ${cb[ext]}`}>
           <div className={cb.container_item}>Item 1</div>
           <div className={cb.container_item}>Item 2</div>
@@ -41,14 +44,14 @@ export default function JustifyContent() {
           <div className={cb.controls_wrapper}>
             <p>justify-content:</p>
             <div className={cb.controls_values} onChange={handleChange}>
-              <label><input type="radio" name="jcValues" value="flex-start" defaultChecked={true} />flex-start</label>
-              <label><input type="radio" name="jcValues" value="flex-end" />flex-end</label>
-              <label><input type="radio" name="jcValues" value="start" />start</label>
-              <label><input type="radio" name="jcValues" value="end" />end</label>
-              <label><input type="radio" name="jcValues" value="center" />center</label>
-              <label><input type="radio" name="jcValues" value="space-between" />space-between</label>
-              <label><input type="radio" name="jcValues" value="space-around" />space-around</label>
-              <label><input type="radio" name="jcValues" value="space-evenly" />space-evenly</label>
+              <label><input type="radio" name="jcValues" value="flex-start" checked={ext === 'flex-start'} onChange={handleChange} />flex-start</label>
+              <label><input type="radio" name="jcValues" value="flex-end" checked={ext === 'flex-end'} onChange={handleChange} />flex-end</label>
+              <label><input type="radio" name="jcValues" value="start" checked={ext === 'start'} onChange={handleChange} />start</label>
+              <label><input type="radio" name="jcValues" value="end" checked={ext === 'end'} onChange={handleChange} />end</label>
+              <label><input type="radio" name="jcValues" value="center" checked={ext === 'center'} onChange={handleChange} />center</label>
+              <label><input type="radio" name="jcValues" value="space-between" checked={ext === 'space-between'} onChange={handleChange} />space-between</label>
+              <label><input type="radio" name="jcValues" value="space-around" checked={ext === 'space-around'} onChange={handleChange} />space-around</label>
+              <label><input type="radio" name="jcValues" value="space-evenly" checked={ext === 'space-evenly'} onChange={handleChange} />space-evenly</label>
             </div>
           </div>
         </div>
