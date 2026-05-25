@@ -1,19 +1,21 @@
 import fw from './fw.module.scss';
 import cb from '../CodeBlock/cb.module.scss';
 import CodeBlock from '../CodeBlock/CodeBlock';
-import { useState } from 'react';
+import useUrlState from '../../hooks/useUrlState';
 
 export default function FlexWrap() {
-  let [ext, setExt] = useState('nowrap');
+  const [ext, setExt] = useUrlState('fw_wrap', 'nowrap');
   const min = 150;
   const max = 900;
-  let [width, setWidth] = useState(max);
+  const [width, setWidth] = useUrlState('fw_w', max, { parse: Number });
   let handleChange = (e) => {
     setExt(e.target.value);
   }
   let handleWidth = (e) => {
     setWidth(e.target.value);
   }
+  const cssOutput = `display: flex;\nflex-wrap: ${ext};\nwidth: ${width}px;`;
+
   return (
     <details className={fw.wrapper}>
       <summary><h3>Flex Wrap</h3></summary>
@@ -25,7 +27,7 @@ export default function FlexWrap() {
         <li><strong>wrap-reverse :</strong> flex items will wrap onto multiple lines from bottom to top.</li>
       </ul>
       <p>To see the <code>flex-wrap</code> effect, Try to change the width of below container</p>
-      <CodeBlock>
+      <CodeBlock cssOutput={cssOutput}>
         <div style={{width: `${width}px`}}>
           <div className={`${cb.container} ${cb.flex} ${cb[ext]}`}>
             <div className={cb.container_item}>Item 1</div>
@@ -45,15 +47,15 @@ export default function FlexWrap() {
           <div className={cb.controls_wrapper}>
             <p>flex-wrap:</p>
             <div className={cb.controls_values} onChange={handleChange}>
-              <label><input type="radio" name="fwValues" value="nowrap" defaultChecked={true} />nowrap</label>
-              <label><input type="radio" name="fwValues" value="wrap" />wrap</label>
-              <label><input type="radio" name="fwValues" value="wrap-reverse" />wrap-reverse</label>
+              <label><input type="radio" name="fwValues" value="nowrap" checked={ext === 'nowrap'} onChange={handleChange} />nowrap</label>
+              <label><input type="radio" name="fwValues" value="wrap" checked={ext === 'wrap'} onChange={handleChange} />wrap</label>
+              <label><input type="radio" name="fwValues" value="wrap-reverse" checked={ext === 'wrap-reverse'} onChange={handleChange} />wrap-reverse</label>
             </div>
           </div>
           <div className={cb.controls_wrapper}>
             <p>container width:</p>
             <div className={cb.controls_width}>
-              <input type='range' min={min} max={max} name='widthValue' defaultValue={width} onChange={handleWidth} /> {width}px
+              <input type='range' min={min} max={max} name='widthValue' value={width} onChange={handleWidth} /> {width}px
             </div>
           </div>
         </div>

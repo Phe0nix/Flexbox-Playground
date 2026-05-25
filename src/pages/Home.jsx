@@ -10,7 +10,8 @@ import FlexWrap from "../comp/FlexWrap/FlexWrap"
 import Gap from "../comp/Gap/Gap"
 import JustifyContent from "../comp/JustifyContent/JustifyContent"
 import Order from "../comp/Order/Order"
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
+import useUrlState from "../hooks/useUrlState"
 
 const LESSONS = [
   { id: 'flex-container', label: 'Flex Container', type: 'container', Component: FlexContainer },
@@ -28,8 +29,8 @@ const LESSONS = [
 ]
 
 export default function Home() {
-  const [query, setQuery] = useState('')
-  const [group, setGroup] = useState('all')
+  const [query, setQuery] = useUrlState('q', '')
+  const [group, setGroup] = useUrlState('g', 'all')
 
   const filteredLessons = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
