@@ -1,26 +1,56 @@
 # Flexbox Playground
 
-A new way to learn CSS flexbox with live playground. Here for each Flexbox property, you can read about it and at the same time, you can able to live to view how this property works.
+Flexbox Playground is an interactive learning tool for understanding CSS Flexbox visually. Each lesson explains a single property and lets you change values live so you can immediately see how layout behavior changes.
 
-Watch - [Flexbox Playground](https://tranquil-semolina-40605c.netlify.app/)
+Live app: [Flexbox Playground](https://tranquil-semolina-40605c.netlify.app/)
 
-This project now uses [Vite](https://vitejs.dev/) for development and builds.
+## Features
 
-In the project directory, you can run:
+- Interactive demos for core Flexbox container and item properties
+- Modern lesson browser with search and group filters
+- Collapsible lesson sections for focused exploration
+- URL-shareable playground state for lesson controls and filters
+- Live CSS output panel with copy-to-clipboard support
+- Responsive UI built for desktop and mobile use
 
-### `npm run dev`
+## Covered Properties
 
-Runs the app in development mode.
-Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
+Container properties:
 
-### `npm run build`
+- `display: flex`
+- `flex-direction`
+- `flex-wrap`
+- `flex-flow`
+- `justify-content`
+- `align-items`
+- `align-content`
+- `gap`
 
-Builds the app for production into the `dist` folder.
+Item properties:
 
-### `npm run preview`
+- `order`
+- `flex-grow`
+- `flex-shrink`
+- `flex-basis`
 
-Serves the production build locally.
+## Shareable Links
 
-### `npm test`
+The playground stores lesson filter state and lesson control state in the URL.
 
-Runs tests with Vitest.
+That means you can:
+
+- configure a lesson
+- copy the page URL
+- send it to someone else
+- reopen the exact same lesson state later
+
+Shared URLs also preserve the lesson anchor so the page opens on the relevant property section.
+
+## Tech Stack
+
+- React 18
+- Vite 5
+- Sass / SCSS modules
+- Vitest
+- Testing Library
+

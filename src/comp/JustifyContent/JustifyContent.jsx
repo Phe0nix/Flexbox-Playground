@@ -4,7 +4,7 @@ import CodeBlock from '../CodeBlock/CodeBlock';
 import useUrlState from '../../hooks/useUrlState';
 
 export default function JustifyContent() {
-  const [ext, setExt] = useUrlState('jc_j', 'flex-start');
+  const [ext, setExt] = useUrlState('jc_j', 'flex-start', { hash: 'justify-content' });
   let handleChange = (e) => {
     setExt(e.target.value);
   }

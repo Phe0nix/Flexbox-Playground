@@ -4,7 +4,7 @@ import CodeBlock from '../CodeBlock/CodeBlock';
 import useUrlState from '../../hooks/useUrlState';
 
 export default function FlexGrow() {
-  const [fgrow, setFgrow] = useUrlState('fg_v', 'fg1');
+  const [fgrow, setFgrow] = useUrlState('fg_v', 'fg1', { hash: 'flex-grow' });
   let handleFlexGrow = (e) => {
     setFgrow(e.target.value);
   }
