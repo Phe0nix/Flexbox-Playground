@@ -1,16 +1,16 @@
 import ac from './ac.module.scss';
 import cb from '../CodeBlock/cb.module.scss';
 import CodeBlock from '../CodeBlock/CodeBlock';
-import { useState } from 'react';
+import useUrlState from '../../hooks/useUrlState';
 
 export default function AlignContent() {
-  let [ext, setExt] = useState('normal');
-  let [fwrap, setFwrap] = useState('wrap');
+  const [ext, setExt] = useUrlState('ac_val', 'normal');
+  const [fwrap, setFwrap] = useUrlState('ac_wrap', 'wrap');
   const min = 150;
   const max = 900;
-  let [width, setWidth] = useState(max);
+  const [width, setWidth] = useUrlState('ac_w', max, { parse: Number });
   let handleChange = (e) => {
-    setExt('ac' + e.target.value);
+    setExt(e.target.value);
   }
   let handleWidth = (e) => {
     setWidth(e.target.value);
@@ -18,6 +18,8 @@ export default function AlignContent() {
   let handleWrap = (e) => {
     setFwrap(e.target.value);
   }
+  const cssOutput = `display: flex;\nflex-wrap: ${fwrap};\nalign-content: ${ext};\nwidth: ${width}px;`;
+
   return (
     <details className={ac.wrapper}>
       <summary><h3>Align Content</h3></summary>
@@ -34,9 +36,9 @@ export default function AlignContent() {
         <li><strong>space-evenly:</strong> items are evenly distributed with equal space around them.</li>
       </ul>
       <p>To see the <code>align-content</code> effect, Try to change the width to make below container multiline layout.</p>
-      <CodeBlock>
+      <CodeBlock cssOutput={cssOutput}>
         <div style={{width: `${width}px`}}>
-          <div className={`${cb.container} ${cb.flex} ${cb[fwrap]} ${cb[ext]}`}>
+          <div className={`${cb.container} ${cb.flex} ${cb[fwrap]} ${cb['ac' + ext]}`}>
             <div className={cb.container_item}>Item 1</div>
             <div className={cb.container_item}>Item 2</div>
             <div className={cb.container_item}>Item 3</div>
@@ -56,27 +58,27 @@ export default function AlignContent() {
           <div className={cb.controls_wrapper} onChange={handleWrap}>
             <p>flex-wrap:</p>
             <div className={cb.controls_values}>
-              <label><input type="radio" name="acwrap" value="wrap" defaultChecked={true} />wrap</label>
-              <label><input type="radio" name="acwrap" value="wrap-reverse" />wrap-reverse</label>
+              <label><input type="radio" name="acwrap" value="wrap" checked={fwrap === 'wrap'} onChange={handleWrap} />wrap</label>
+              <label><input type="radio" name="acwrap" value="wrap-reverse" checked={fwrap === 'wrap-reverse'} onChange={handleWrap} />wrap-reverse</label>
             </div>
           </div>
           <div className={cb.controls_wrapper}>
             <p>justify-content:</p>
             <div className={cb.controls_values} onChange={handleChange}>
-              <label><input type="radio" name="acValues" value="normal" defaultChecked={true} />normal</label>
-              <label><input type="radio" name="acValues" value="flex-start" />flex-start / start</label>
-              <label><input type="radio" name="acValues" value="flex-end" />flex-end / end</label>
-              <label><input type="radio" name="acValues" value="stretch" />stretch</label>
-              <label><input type="radio" name="acValues" value="center" />center</label>
-              <label><input type="radio" name="acValues" value="space-between" />space-between</label>
-              <label><input type="radio" name="acValues" value="space-around" />space-around</label>
-              <label><input type="radio" name="acValues" value="space-evenly" />space-evenly</label>
+              <label><input type="radio" name="acValues" value="normal" checked={ext === 'normal'} onChange={handleChange} />normal</label>
+              <label><input type="radio" name="acValues" value="flex-start" checked={ext === 'flex-start'} onChange={handleChange} />flex-start / start</label>
+              <label><input type="radio" name="acValues" value="flex-end" checked={ext === 'flex-end'} onChange={handleChange} />flex-end / end</label>
+              <label><input type="radio" name="acValues" value="stretch" checked={ext === 'stretch'} onChange={handleChange} />stretch</label>
+              <label><input type="radio" name="acValues" value="center" checked={ext === 'center'} onChange={handleChange} />center</label>
+              <label><input type="radio" name="acValues" value="space-between" checked={ext === 'space-between'} onChange={handleChange} />space-between</label>
+              <label><input type="radio" name="acValues" value="space-around" checked={ext === 'space-around'} onChange={handleChange} />space-around</label>
+              <label><input type="radio" name="acValues" value="space-evenly" checked={ext === 'space-evenly'} onChange={handleChange} />space-evenly</label>
             </div>
           </div>
           <div className={cb.controls_wrapper}>
             <p>container width:</p>
             <div className={cb.controls_width}>
-              <input type='range' min={min} max={max} name='widthValue' defaultValue={width} onChange={handleWidth} /> {width}px
+              <input type='range' min={min} max={max} name='widthValue' value={width} onChange={handleWidth} /> {width}px
             </div>
           </div>
         </div>

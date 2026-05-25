@@ -1,13 +1,24 @@
 import ai from './ai.module.scss';
 import cb from '../CodeBlock/cb.module.scss';
 import CodeBlock from '../CodeBlock/CodeBlock';
-import { useState } from 'react';
+import useUrlState from '../../hooks/useUrlState';
+
+const ALIGN_ITEMS_MAP = {
+  stretch: 'stretch',
+  'f-start': 'flex-start',
+  'f-end': 'flex-end',
+  cnter: 'center',
+  baseline: 'baseline'
+};
 
 export default function AlignItems() {
-  let [ext, setExt] = useState('stretch');
+  const [ext, setExt] = useUrlState('ai_a', 'stretch');
   let handleChange = (e) => {
     setExt(e.target.value);
   }
+
+  const cssOutput = `display: flex;\nalign-items: ${ALIGN_ITEMS_MAP[ext] || 'stretch'};`;
+
   return (
     <details className={ai.wrapper}>
       <summary><h3>Align Items</h3></summary>
@@ -19,7 +30,7 @@ export default function AlignItems() {
         <li><strong>baseline:</strong> items are aligned such as their baselines align. In many cases, when the <strong>font size is the same</strong> among items, then <code>flex-start</code> and <code>baseline</code> <strong>will be indistinguishable</strong>. But <strong>if font size varies</strong> among flex items, then baseline can make a <strong>noticeable difference</strong>.</li>
         <li><strong>center:</strong> Pack items around the center. </li>
       </ul>
-      <CodeBlock>
+      <CodeBlock cssOutput={cssOutput}>
         <div className={`${cb.container} ${cb.flex} ${cb[ext]}`}>
           <div className={cb.container_item}>Item 1</div>
           <div className={cb.container_item}>Item 2</div>
@@ -36,11 +47,11 @@ export default function AlignItems() {
           <div className={cb.controls_wrapper}>
             <p>align-items:</p>
             <div className={cb.controls_values} onChange={handleChange}>
-              <label><input type="radio" name="aiValues" value="stretch" defaultChecked={true} />stretch</label>
-              <label><input type="radio" name="aiValues" value="f-start" />flex-start / start / self-start</label>
-              <label><input type="radio" name="aiValues" value="f-end" />flex-end / end /  self-end</label>
-              <label><input type="radio" name="aiValues" value="cnter" />center</label>
-              <label><input type="radio" name="aiValues" value="baseline" />baseline</label>
+              <label><input type="radio" name="aiValues" value="stretch" checked={ext === 'stretch'} onChange={handleChange} />stretch</label>
+              <label><input type="radio" name="aiValues" value="f-start" checked={ext === 'f-start'} onChange={handleChange} />flex-start / start / self-start</label>
+              <label><input type="radio" name="aiValues" value="f-end" checked={ext === 'f-end'} onChange={handleChange} />flex-end / end /  self-end</label>
+              <label><input type="radio" name="aiValues" value="cnter" checked={ext === 'cnter'} onChange={handleChange} />center</label>
+              <label><input type="radio" name="aiValues" value="baseline" checked={ext === 'baseline'} onChange={handleChange} />baseline</label>
             </div>
           </div>
         </div>

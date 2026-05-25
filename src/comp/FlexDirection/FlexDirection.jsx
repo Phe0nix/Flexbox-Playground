@@ -1,13 +1,16 @@
 import fd from './fd.module.scss';
 import cb from '../CodeBlock/cb.module.scss';
 import CodeBlock from '../CodeBlock/CodeBlock';
-import { useState } from 'react';
+import useUrlState from '../../hooks/useUrlState';
 
 export default function FlexDirection() {
-  let [ext, setExt] = useState('row');
+  const [ext, setExt] = useUrlState('fd_dir', 'row');
   let handleChange = (e) => {
     setExt(e.target.value);
   }
+
+  const cssOutput = `display: flex;\nflex-direction: ${ext};`;
+
   return (
     <details className={fd.wrapper}>
       <summary><h3>Flex Direction</h3></summary>
@@ -19,7 +22,7 @@ export default function FlexDirection() {
         <li><strong>column:</strong> same as row but top to bottom</li>
         <li><strong>column-reverse:</strong> same as row-reverse but bottom to top</li>
       </ul>
-      <CodeBlock>
+      <CodeBlock cssOutput={cssOutput}>
         <div className={`${cb.container} ${cb.flex} ${cb[ext]}`}>
           <div className={cb.container_item}>Item 1</div>
           <div className={cb.container_item}>Item 2</div>
@@ -36,10 +39,10 @@ export default function FlexDirection() {
           <div className={cb.controls_wrapper}>
             <p>flex-direction:</p>
             <div className={cb.controls_values} onChange={handleChange}>
-              <label><input type="radio" name="fdValues" value="row" defaultChecked={true} />row</label>
-              <label><input type="radio" name="fdValues" value="row-reverse" />row-reverse</label>
-              <label><input type="radio" name="fdValues" value="column" />column</label>
-              <label><input type="radio" name="fdValues" value="column-reverse" />column-reverse</label>
+              <label><input type="radio" name="fdValues" value="row" checked={ext === 'row'} onChange={handleChange} />row</label>
+              <label><input type="radio" name="fdValues" value="row-reverse" checked={ext === 'row-reverse'} onChange={handleChange} />row-reverse</label>
+              <label><input type="radio" name="fdValues" value="column" checked={ext === 'column'} onChange={handleChange} />column</label>
+              <label><input type="radio" name="fdValues" value="column-reverse" checked={ext === 'column-reverse'} onChange={handleChange} />column-reverse</label>
             </div>
           </div>
         </div>

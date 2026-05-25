@@ -1,19 +1,18 @@
 import gap from './gap.module.scss';
 import cb from '../CodeBlock/cb.module.scss';
 import CodeBlock from '../CodeBlock/CodeBlock';
-import { useState } from 'react';
+import { useEffect } from 'react';
+import useUrlState from '../../hooks/useUrlState';
 
 export default function Gap() {
-  let [fwrap, setFwrap] = useState('wrap');
+  const [fwrap, setFwrap] = useUrlState('gap_wrap', 'wrap');
   const min = 150;
   const max = 900;
-  let rg = window.getComputedStyle(document.documentElement).getPropertyValue('--row-gap');
-  let cg = window.getComputedStyle(document.documentElement).getPropertyValue('--column-gap');
   const gmin = 10;
   const gmax = 50;
-  let [width, setWidth] = useState(max);
-  let [rowGap, setRowGap] = useState(rg);
-  let [colGap, setColGap] = useState(cg);
+  const [width, setWidth] = useUrlState('gap_w', max, { parse: Number });
+  const [rowGap, setRowGap] = useUrlState('gap_rg', gmin, { parse: Number });
+  const [colGap, setColGap] = useUrlState('gap_cg', gmin, { parse: Number });
   let handleRG = (e) => {
     setRowGap(e.target.value);
   }
@@ -26,8 +25,13 @@ export default function Gap() {
   let handleWrap = (e) => {
     setFwrap(e.target.value);
   }
-  document.documentElement.style.setProperty('--row-gap', rowGap + 'px');
-  document.documentElement.style.setProperty('--column-gap', colGap + 'px');
+  useEffect(() => {
+    document.documentElement.style.setProperty('--row-gap', `${rowGap}px`);
+    document.documentElement.style.setProperty('--column-gap', `${colGap}px`);
+  }, [colGap, rowGap]);
+
+  const cssOutput = `display: flex;\nflex-wrap: ${fwrap};\ngap: ${rowGap}px ${colGap}px;\nwidth: ${width}px;`;
+
   return (
     <details className={gap.wrapper}>
       <summary><h3>Gap</h3></summary>
@@ -38,7 +42,7 @@ export default function Gap() {
         <li><strong>column-gap:</strong> adds the space horizontally. </li>
       </ul>
       <p>To see the <code>gap</code> effect, Try to change the width to make below container multiline layout.</p>
-      <CodeBlock>
+      <CodeBlock cssOutput={cssOutput}>
         <div style={{width: `${width}px`}}>
           <div className={`${cb.container} ${cb.flex} ${cb[fwrap]} ${cb.gap}`}>
             <div className={cb.container_item}>Item 1</div>
@@ -61,26 +65,26 @@ export default function Gap() {
           <div className={cb.controls_wrapper} onChange={handleWrap}>
             <p>flex-wrap:</p>
             <div className={cb.controls_values}>
-              <label><input type="radio" name="gapwrap" value="wrap" defaultChecked={true} />wrap</label>
-              <label><input type="radio" name="gapwrap" value="wrap-reverse" />wrap-reverse</label>
+              <label><input type="radio" name="gapwrap" value="wrap" checked={fwrap === 'wrap'} onChange={handleWrap} />wrap</label>
+              <label><input type="radio" name="gapwrap" value="wrap-reverse" checked={fwrap === 'wrap-reverse'} onChange={handleWrap} />wrap-reverse</label>
             </div>
           </div>
           <div className={cb.controls_wrapper}>
             <p>row-gap (px):</p>
             <div className={cb.controls_values}>
-              <input type='range' min={gmin} max={gmax} name='rgValue' defaultValue={rowGap} onChange={handleRG} /> {rowGap}
+              <input type='range' min={gmin} max={gmax} name='rgValue' value={rowGap} onChange={handleRG} /> {rowGap}
             </div>
           </div>
           <div className={cb.controls_wrapper}>
             <p>column-gap (px):</p>
             <div className={cb.controls_values}>
-              <input type='range' min={gmin} max={gmax} name='cgValue' defaultValue={colGap} onChange={handleCG} /> {colGap}
+              <input type='range' min={gmin} max={gmax} name='cgValue' value={colGap} onChange={handleCG} /> {colGap}
             </div>
           </div>
           <div className={cb.controls_wrapper}>
             <p>container width:</p>
             <div className={cb.controls_width}>
-              <input type='range' min={min} max={max} name='widthValue' defaultValue={width} onChange={handleWidth} /> {width}px
+              <input type='range' min={min} max={max} name='widthValue' value={width} onChange={handleWidth} /> {width}px
             </div>
           </div>
         </div>
