@@ -4,14 +4,23 @@ A new way to learn CSS flexbox with live playground. Here for each Flexbox prope
 
 Watch - [Flexbox Playground](https://tranquil-semolina-40605c.netlify.app/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project now uses [Vite](https://vitejs.dev/) for development and builds.
 
-Download the ZIP file and In the project directory, you can run the following:
+In the project directory, you can run:
 
-### `npm start`
+### `npm run dev`
 
-It runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Runs the app in development mode.
+Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `npm run build`
+
+Builds the app for production into the `dist` folder.
+
+### `npm run preview`
+
+Serves the production build locally.
+
+### `npm test`
+
+Runs tests with Vitest.
