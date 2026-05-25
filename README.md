@@ -2,7 +2,7 @@
 
 Flexbox Playground is an interactive learning tool for understanding CSS Flexbox visually. Each lesson explains a single property and lets you change values live so you can immediately see how layout behavior changes.
 
-Live app: [Flexbox Playground](https://tranquil-semolina-40605c.netlify.app/)
+Live app: [Flexbox Playground](https://phe0nix.github.io/Flexbox-Playground/)
 
 ## Features
 
