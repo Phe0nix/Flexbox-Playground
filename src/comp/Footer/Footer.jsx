@@ -1,7 +1,8 @@
 export default function Footer() {
   return (
-    <header>
-      <p>This is Footer</p>
-    </header>
+    <footer className="siteFooter">
+      <p>Built for curious frontend developers.</p>
+      <a href="#playground">Back to playground</a>
+    </footer>
   )
 }
